@@ -1,1 +1,1 @@
-# wdio-e2e projectsss
+# wdio-e2e
