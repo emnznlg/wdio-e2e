@@ -20,3 +20,19 @@ Then(
     chai.expect(await browser.getUrl()).to.equal(expectedURL);
   }
 );
+
+Given(/^A web page is opened$/, async () => {
+  await browser.url("/inputs");
+  await browser.setTimeout({ implicit: 15000, pageLoad: 10000 });
+  await browser.maximizeWindow();
+});
+
+When(/^Perform web interactions$/, async () => {
+  let ele = await $(`[type="number"]`);
+  let num = 12345;
+  let strNum = num.toString();
+  for (let i = 0; i < strNum.length; i++) {
+    await browser.pause(1000);
+    await ele.addValue(strNum.split("")[i]);
+  }
+});
