@@ -1,5 +1,6 @@
 import { Given, When, Then } from "@wdio/cucumber-framework";
 import chai from "chai";
+//import * as helpers from "../helper/helperFunctions.ts";
 
 Given(/^User opens the Google page$/, async function () {
   await browser.url("https://www.google.com");
@@ -35,4 +36,29 @@ When(/^Perform web interactions$/, async () => {
     await browser.pause(1000);
     await ele.addValue(strNum.split("")[i]);
   }
+});
+
+Given(/^A web page -(.*)- is opened$/, async (webPage) => {
+  await browser.url(`/${webPage}`);
+  await browser.setTimeout({ implicit: 15000, pageLoad: 10000 });
+  await browser.maximizeWindow();
+});
+
+When(/^Choose an element -(.*)- from dropdown$/, async (element) => {
+  let dropdown = await $(`#dropdown`);
+  await dropdown.selectByVisibleText(element);
+});
+
+When(/^Perform window handling actions$/, async function () {
+  await $(`=Click Here`).click();
+
+  //==> Kendim helper fonksiyon yazmaya calistim...
+  // await helpers.switchToWindow("New Windows");
+  // let title = await browser.getTitle();
+  // console.log(title);
+
+  //==> 5 dk sonra aslinda gerek olmadigini ogrendim :)
+  await browser.switchWindow("New Window");
+  let title = await browser.getTitle();
+  console.log(title);
 });
