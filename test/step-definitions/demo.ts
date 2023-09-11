@@ -62,3 +62,9 @@ When(/^Perform window handling actions$/, async function () {
   let title = await browser.getTitle();
   console.log(title);
 });
+
+When(/^Perform alert handling actions$/, async function () {
+  await $(`button=Click for JS Alert`).click();
+  await browser.acceptAlert();
+  await browser.pause(5000);
+});
