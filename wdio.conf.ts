@@ -1,3 +1,4 @@
+let headless = process.env.HEADLESS;
 import type { Options } from "@wdio/types";
 export const config: Options.Testrunner = {
   //
@@ -10,8 +11,8 @@ export const config: Options.Testrunner = {
     autoCompile: true,
     tsNodeOpts: {
       project: "./tsconfig.json",
-      transpileOnly: true,
-    },
+      transpileOnly: true
+    }
   },
 
   //
@@ -60,7 +61,21 @@ export const config: Options.Testrunner = {
   capabilities: [
     {
       browserName: "chrome",
-    },
+      maxInstances: 3,
+      "goog:chromeOptions": {
+        args:
+          headless?.trim().toUpperCase() === "Y"
+            ? [
+                "--disable-web-security",
+                "--headless",
+                "--disable-dev-shm-usage",
+                "--no-sandbox",
+                "--windows-size=1920,1080"
+              ]
+            : []
+      },
+      timeouts: { implicit: 10000, pageLoad: 20000, script: 30000 }
+    }
   ],
 
   //
@@ -158,8 +173,8 @@ export const config: Options.Testrunner = {
     // <number> timeout for step definitions
     timeout: 60000,
     // <boolean> Enable this config to treat undefined definitions as warnings.
-    ignoreUndefinedDefinitions: true,
-  },
+    ignoreUndefinedDefinitions: true
+  }
 
   //
   // =====

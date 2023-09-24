@@ -1,6 +1,6 @@
 Feature: SauceDemo
 
-    @sauceDemo
+    @sauceDemo @demo
     Scenario Outline: Demo SauceDemo
         Given Login to inventory web app
         Then Inventory page should list <numberOfProducts>

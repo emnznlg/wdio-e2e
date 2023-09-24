@@ -15,12 +15,9 @@ When(/^User clicks on the first search result$/, async function () {
   await $(`<h3>`).click();
 });
 
-Then(
-  /^User verifies that the URL matches with the (.*)$/,
-  async function (expectedURL) {
-    chai.expect(await browser.getUrl()).to.equal(expectedURL);
-  }
-);
+Then(/^User verifies that the URL matches with the (.*)$/, async function (expectedURL) {
+  chai.expect(await browser.getUrl()).to.equal(expectedURL);
+});
 
 Given(/^A web page is opened$/, async () => {
   await browser.url("/inputs");

@@ -1,6 +1,6 @@
 Feature: Dropdown
 
-    @alerts
+    @alerts @smoke
     Scenario Outline: Demo Dropdown
         Given A web page -<webPage>- is opened
         When Perform alert handling actions
